@@ -1,4 +1,9 @@
+import java.util.Map;
+import java.util.HashMap;
+
 public abstract class Being{
+	static Map<String, Race> stringToRace = new HashMap<String, Race>();
+
 	public String name;
 	public Race race;
 	public int str = 10, agi = 10, con = 10, wis = 10, HP, MP, tHP, tMP, lvl;
@@ -16,18 +21,7 @@ public abstract class Being{
 	}
 
 	public Race getRace(String rce, Being b){
-		switch(rce.toUpperCase()){
-			case "ELF":
-				return new Elf(b);
-			case "DWARF":
-				return new Dwarf(b);
-			case "HUMAN":
-				return new Human(b);
-			case "GNOME":
-				return new Gnome(b);
-			default:
-				throw new IllegalArgumentException(rce + " is not a valid Race...");
-		}
+		return stringToRace.get(rce);
 	}
 
 	public void stats(){
